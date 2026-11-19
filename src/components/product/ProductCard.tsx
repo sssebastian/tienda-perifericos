@@ -1,6 +1,7 @@
 import Image from 'next/image';
  import { formatPrice } from '@/lib/format';
  import { ImageIcon } from '@/components/ui/icons';
+ import Link from 'next/link';
   
  /** Fila de la vista product_cards creada en el script SQL. */
  export type ProductCardData = {
@@ -24,6 +25,7 @@ import Image from 'next/image';
   
    // En la Fase 2 esta tarjeta enlazará a /producto/[slug]
    return (
+     <Link href={`/producto/${product.slug}`} className="block">
      <article className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:shadow-lg">
        <div className="relative aspect-square bg-slate-100">
          {product.image_url ? (
@@ -54,5 +56,6 @@ import Image from 'next/image';
          </div>
        </div>
      </article>
+     </Link>
    );
  }

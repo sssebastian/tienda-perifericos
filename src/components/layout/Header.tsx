@@ -5,7 +5,8 @@ import Link from 'next/link';
  import { MenuIcon } from '@/components/ui/icons';
  import { Dropdown } from '@/components/ui/Dropdown';
  import { UserMenu } from './UserMenu';
-  
+ import { CartButton } from './CartButton';
+
  type Category = { id: string; name: string; slug: string };
   
  async function getCategories(): Promise<Category[]> {
@@ -26,7 +27,7 @@ import Link from 'next/link';
      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
        {/* Franja superior */}
        <div className="bg-brand-900 text-center text-xs text-brand-100">
-         <p className="mx-auto max-w-7xl px-4 py-1.5">Envíos a todo el Perú · Paga con tarjeta o Yape</p>
+         <p className="mx-auto max-w-7xl px-4 py-1.5">Envíos a todo el Perú · Paga en linea y de manera segura y rápida</p>
        </div>
   
        <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4">
@@ -65,8 +66,14 @@ import Link from 'next/link';
            ))}
          </nav>
   
-         {/* Cuenta */}
-         <div className="ml-auto">
+          <form action="/buscar" className="hidden lg:block">
+           <input name="q" type="search" placeholder="Buscar productos…"
+           className="w-64 rounded-lg border border-slate-300 px-3 py-2 text-sm" />
+          </form>
+
+         {/* Carrito y cuenta */}
+         <div className="ml-auto flex items-center gap-1">
+           <CartButton />
            {user ? (
              <UserMenu name={profile?.full_name || user.email} isAdmin={profile?.role === 'admin'} />
            ) : (
